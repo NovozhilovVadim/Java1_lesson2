@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class main {
     /*
 1. Задать целочисленный массив, состоящий из элементов 0 и 1. Например: [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ].
@@ -22,19 +24,61 @@ public class main {
 
 
     public static void main(String[] args) {
+        System.out.println("Task 1: ");
+        task1();
+        System.out.println(" \n" + "Task 2: ");
+        task2(8);
+        System.out.println(" \n" + "Task 3: ");
+        task3();
+
 
     }
 
     public static void task1 (){
-
+        int[] arr = new int[10]; // Создаём и инициализируем массив
+        for (int i = 0; i < arr.length; i++){ // Проходим по массиву в цикле и заполняем его случайным образом "1" и "0"
+            Random random  = new Random();
+            arr[i] = random.nextInt(2);
+        }
+        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
+            System.out.print(arr[i]);
+        }
+        System.out.println(); // перевод строки
+        for (int i = 0; i < arr.length; i++){ // проходим по массиву в цикле и меняем "1" на "0" и "0" на "1"
+            if(arr[i] == 0){
+                arr[i] = 1;
+            }else arr[i] = 0;
+        }
+        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
+            System.out.print(arr[i]);
+        }
     }
 
-    public static void task2 (){
-
+    public static void task2 (int leght){ //получаем размер массива
+        int arr[] = new int[leght]; // создаём и инициализируем массив
+        arr[0] = 0; // заполняем самыый первый элемент массива "0"
+        for (int i = 1; i < arr.length; i++ ){ // при каждой итерации увеливаем значение предыдущей я чейки на 3 и записываем в массив
+            arr[i] = arr[i-1] +3;
+        }
+        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
+            System.out.print(arr[i] + " ");
+        }
     }
 
     public static void task3 (){
-
+        int[] arr = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
+            System.out.print(arr[i] + " ");
+        }
+        for (int i = 0; i < arr.length; i++){ // читаем массив в цикле и числа менбше "6" умножаем на "2"
+            if (arr[i] < 6){
+                arr[i] = arr[i] * 2;
+            }
+        }
+        System.out.println();
+        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
+            System.out.print(arr[i] + " ");
+        }
     }
 
     public static void task4 (){
