@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class main {
@@ -35,6 +36,17 @@ public class main {
         task4();
         System.out.println(" \n" + "Task 5: ");
         task5(6);
+        System.out.println(" \n" + "Task 6: ");
+        int[] arr0 = {2,1,1,2,1};
+        task6(arr0);
+        System.out.println(" \n" + "Task 7: ");
+        int[] arr00 = {1, 2, 3, 4};
+        task7(arr00, -1);
+    }
+    public static void printArr(int[] arr){ // Вывод массива в консоль
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
     }
 
     public static void task1 (){
@@ -43,18 +55,16 @@ public class main {
             Random random  = new Random();
             arr[i] = random.nextInt(2);
         }
-        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
-            System.out.print(arr[i]);
-        }
+        printArr(arr);
+
         System.out.println(); // перевод строки
-        for (int i = 0; i < arr.length; i++){ // проходим по массиву в цикле и меняем "1" на "0" и "0" на "1"
+        for (int i = 0; i < arr.length - 1; i++){ // проходим по массиву в цикле и меняем "1" на "0" и "0" на "1"
             if(arr[i] == 0){
                 arr[i] = 1;
             }else arr[i] = 0;
         }
-        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
-            System.out.print(arr[i]);
-        }
+        printArr(arr);
+
     }
 
     public static void task2 (int leght){ //получаем размер массива
@@ -63,25 +73,20 @@ public class main {
         for (int i = 1; i < arr.length; i++ ){ // при каждой итерации увеливаем значение предыдущей я чейки на 3 и записываем в массив
             arr[i] = arr[i-1] +3;
         }
-        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
-            System.out.print(arr[i] + " ");
-        }
+        printArr(arr);
+
     }
 
     public static void task3 (){
         int[] arr = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
-            System.out.print(arr[i] + " ");
-        }
+        printArr(arr);
         for (int i = 0; i < arr.length; i++){ // читаем массив в цикле и числа менбше "6" умножаем на "2"
             if (arr[i] < 6){
                 arr[i] = arr[i] * 2;
             }
         }
         System.out.println();
-        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
-            System.out.print(arr[i] + " ");
-        }
+        printArr(arr);
     }
 
     public static void task4 (){
@@ -94,7 +99,6 @@ public class main {
         for (int i = 0; i < arr.length; i++){ // заполняем массив по диагоналям "1"
             for (int j = 0; j < arr.length; j++){
                 arr[i][i] = 1; // Диагональ с лева на право
-
             }
             arr [i][(arr.length - 1) - i] = 1; //диагональ с права налево ( "(arr.length - 1)" - индексы в массиве начинаются с 0)
         }
@@ -112,9 +116,7 @@ public class main {
             Random random = new Random();
             arr[i] = random.nextInt(201) - 100;
         }
-        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
-            System.out.print(arr[i] + " ");
-        }
+        printArr(arr);
         // Создаём переменные для минимального и максимального значений
         int max;
         int min = Integer.MAX_VALUE; // изначально присваиваем переменной min максимально допустимое значение для int
@@ -136,12 +138,58 @@ public class main {
     }
 
     public static boolean task6 (int[] a){
+        int[] arr = a;
+        printArr(arr);
+        System.out.println();
+        int summLeft = 0; // сумма левой части
+        int summRight; // сумма правой части
 
-        return false;
+        for (int i = 0; i < arr.length; i++) { // подсчет суммы в левой части
+            summRight = 0; // в начале каждого цикла обнуляем значение в правой части
+            summLeft = summLeft + arr[i];
+            for (int j = i+1; j < arr.length ; j++) { // считаем значение в правой части
+                summRight = summRight + arr[j];
+
+            }
+            System.out.println("iteration - " + i );
+            System.out.println("summLeft: " + summLeft + " " + "summRight: " + summRight);
+            if (summLeft == summRight){ // при каждом цикле сравниваем суммы
+                System.out.println("Result = true");
+                return true; // если суммы совпал - возвращаем true и выходим из цикла
+            }
+        }
+        System.out.println("Result  = false");
+        return false; // если совпадений нет - возвращаем false
     }
 
     public static void task7 (int[] a, int n){
-
+        int[] arr = a;
+        printArr(arr);
+        System.out.println();
+        if (n > 0){
+            System.out.println("n > 0: >>>>>");
+            for (int i = 0; i < n; i++) {
+                int val = arr[0];
+                arr[0] = arr[arr.length - 1];
+                for (int j = 0; j < arr.length - 1; j++) {
+                    int val1 = arr[j+1];
+                    arr[j+1] =val;
+                    val = val1;
+                }
+            }
+        }else {
+            System.out.println("n < 0: <<<<<");
+            n = n* (-1);
+            for (int i = 0; i < n ; i++) {
+                int val = arr[arr.length - 1];
+                arr[arr.length - 1] = arr[0];
+                for (int j = arr.length - 1; j > 0 ; j--) {
+                    int val1 = arr[j-1];
+                    arr[j-1] =val;
+                    val = val1;
+                }
+            }
+        }
+        printArr(arr);
     }
-
 }
