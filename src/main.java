@@ -33,6 +33,8 @@ public class main {
         task3();
         System.out.println(" \n" + "Task 4: ");
         task4();
+        System.out.println(" \n" + "Task 5: ");
+        task5(6);
     }
 
     public static void task1 (){
@@ -104,7 +106,32 @@ public class main {
         }
     }
 
-    public static void task5 (){
+    public static void task5 (int length){
+        int[] arr = new int[length]; // Создаём и инициализируем массив заданной длинны
+        for (int i = 0; i < arr.length; i++){ // Заполняем его случайными числами в диапозоне от "-100" - "100"
+            Random random = new Random();
+            arr[i] = random.nextInt(201) - 100;
+        }
+        for (int i = 0; i < arr.length; i++){ // Читаем массив в консоль
+            System.out.print(arr[i] + " ");
+        }
+        // Создаём переменные для минимального и максимального значений
+        int max;
+        int min = Integer.MAX_VALUE; // изначально присваиваем переменной min максимально допустимое значение для int
+        for (int i = 0; i < arr.length; i++){ // проходим циклом по массиву, при первой итерации сравниваем значение из ячейки "0"
+            // с максимально возможным значением и если оно меньше - меняем переменную min на значение из ячейки,
+            // дальше сравниваем каждую последующую ячейку с предыдущей через переменную
+            if (arr[i] < min ){
+                min = arr[i];
+            }
+        }
+        max = min; // задаем переменной max самое минимальное значение из массива
+        for (int i = 0; i < arr.length; i++){ // сравниваем значения из массива с минимальным значением и присваем большее.
+            if (arr[i] > max){
+                max = arr[i];
+            }
+        }
+        System.out.println("\n" + "Min: " + min + "\n" + "Max: " + max);
 
     }
 
