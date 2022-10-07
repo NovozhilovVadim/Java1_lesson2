@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Random;
 
 public class main {
@@ -37,16 +36,23 @@ public class main {
         System.out.println(" \n" + "Task 5: ");
         task5(6);
         System.out.println(" \n" + "Task 6: ");
-        int[] arr0 = {2,1,1,2,1};
-        task6(arr0);
+        task6(arrayRandom(6));
         System.out.println(" \n" + "Task 7: ");
-        int[] arr00 = {1, 2, 3, 4};
-        task7(arr00, -1);
+        task7(arrayRandom(10), -1);
     }
     public static void printArr(int[] arr){ // Вывод массива в консоль
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
+    }
+
+    public static int[] arrayRandom(int size){ // Создание массива заданной длинны и заполнение его случайными значениям
+        int[] arr = new int[size]; // Создаём и инициализируем массив c размером size
+        for (int i = 0; i < arr.length; i++){ // Заполняем его случайными числами в диапозоне от "-100" - "100"
+            Random random = new Random();
+            arr[i] = random.nextInt(301) - 100;
+        }
+        return arr; // Возвращаем массив
     }
 
     public static void task1 (){
@@ -56,7 +62,6 @@ public class main {
             arr[i] = random.nextInt(2);
         }
         printArr(arr);
-
         System.out.println(); // перевод строки
         for (int i = 0; i < arr.length - 1; i++){ // проходим по массиву в цикле и меняем "1" на "0" и "0" на "1"
             if(arr[i] == 0){
@@ -64,7 +69,6 @@ public class main {
             }else arr[i] = 0;
         }
         printArr(arr);
-
     }
 
     public static void task2 (int leght){ //получаем размер массива
@@ -74,7 +78,6 @@ public class main {
             arr[i] = arr[i-1] +3;
         }
         printArr(arr);
-
     }
 
     public static void task3 (){
@@ -111,11 +114,8 @@ public class main {
     }
 
     public static void task5 (int length){
-        int[] arr = new int[length]; // Создаём и инициализируем массив заданной длинны
-        for (int i = 0; i < arr.length; i++){ // Заполняем его случайными числами в диапозоне от "-100" - "100"
-            Random random = new Random();
-            arr[i] = random.nextInt(201) - 100;
-        }
+        int[] arr = arrayRandom(length); // Создаём и инициализируем массив заданной длинны
+//        int[] arr = {1, 1, 1, 2, 1};
         printArr(arr);
         // Создаём переменные для минимального и максимального значений
         int max;
@@ -134,22 +134,18 @@ public class main {
             }
         }
         System.out.println("\n" + "Min: " + min + "\n" + "Max: " + max);
-
     }
 
-    public static boolean task6 (int[] a){
-        int[] arr = a;
+    public static boolean task6 (int[] arr){
         printArr(arr);
         System.out.println();
         int summLeft = 0; // сумма левой части
         int summRight; // сумма правой части
-
         for (int i = 0; i < arr.length; i++) { // подсчет суммы в левой части
             summRight = 0; // в начале каждого цикла обнуляем значение в правой части
             summLeft = summLeft + arr[i];
             for (int j = i+1; j < arr.length ; j++) { // считаем значение в правой части
                 summRight = summRight + arr[j];
-
             }
             System.out.println("iteration - " + i );
             System.out.println("summLeft: " + summLeft + " " + "summRight: " + summRight);
@@ -162,28 +158,27 @@ public class main {
         return false; // если совпадений нет - возвращаем false
     }
 
-    public static void task7 (int[] a, int n){
-        int[] arr = a;
+    public static void task7 (int[] arr, int n){
         printArr(arr);
         System.out.println();
-        if (n > 0){
+        if (n > 0){ // если число сдвига положительное - двигаем вправо
             System.out.println("n > 0: >>>>>");
-            for (int i = 0; i < n; i++) {
-                int val = arr[0];
-                arr[0] = arr[arr.length - 1];
-                for (int j = 0; j < arr.length - 1; j++) {
+            for (int i = 0; i < n; i++) { // число итераций на одну меньше числа сдвига
+                int val = arr[0]; // читем начальную ячейку массива в переменную
+                arr[0] = arr[arr.length - 1]; // записываем в начальную ячейку значение последнеё
+                for (int j = 0; j < arr.length - 1; j++) { // дальше в цикле передвигаем по одной ячейке
                     int val1 = arr[j+1];
                     arr[j+1] =val;
                     val = val1;
                 }
             }
         }else {
-            System.out.println("n < 0: <<<<<");
-            n = n* (-1);
+            System.out.println("n < 0: <<<<<"); // если число сдвига отрицательное - то же самое но влево
+            n = n* (-1); // приводим число сдвига к положительному значению
             for (int i = 0; i < n ; i++) {
-                int val = arr[arr.length - 1];
-                arr[arr.length - 1] = arr[0];
-                for (int j = arr.length - 1; j > 0 ; j--) {
+                int val = arr[arr.length - 1]; // читаем последнюю ячейку в переменную
+                arr[arr.length - 1] = arr[0]; // пишем в последнюю ячейку значение начальной
+                for (int j = arr.length - 1; j > 0 ; j--) { // двигаем все остальное
                     int val1 = arr[j-1];
                     arr[j-1] =val;
                     val = val1;
